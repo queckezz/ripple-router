@@ -70,6 +70,8 @@ Bind `fn` to `path`.
 * `fn`: function to be executed when a path is dispatched
 * `template` If you define a template instead of a function, it will directly append your template to any element with a `view` attribute on it
 
-### #listen()
+### #listen(path)
+
+* `path`: Only listen on a specific route
 
 Start and listen for link clicks that the router should handle.

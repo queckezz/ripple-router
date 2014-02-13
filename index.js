@@ -62,11 +62,12 @@ module.exports = function (Ripple) {
     /**
      * Listens for click events and dispatches a `route`
      *
+     * @param {String} path (optional)
      * @return {View}
      */
 
-    View.listen = function () {
-      router.listen();
+    View.listen = function (path) {
+      router.listen(path);
       return View;
     }
   })
