@@ -1,7 +1,7 @@
 
 # Router
 
-Basic routing with [ripple](https://github.com/ripplejs/ripple).
+Basic router for [ripple](https://github.com/ripplejs/ripple).
 
 _Note: I haven't added tests for this yet._
 
@@ -20,7 +20,6 @@ _Note: I haven't added tests for this yet._
   <nav>
     <ul>
       <li><a href='/'>Home</a></li>
-      <li><a href='/projects'>Projects</a></li>
       <li><a href='/login'>Login</a></li>
     </ul>
   </nav>
@@ -37,24 +36,23 @@ var template = require('./template.html');
 var ripple = require('ripple');
 var router = require('router');
 
-var App = ripple()
-  // Use the plugin
+var View = ripple()
+  // Use() the plugin
   .use(router)
   .compile(template);
 
 var el = document.body.firstElementChild;
 
-var app = new App()
+var app = new View()
+  .route('/login', login)
   .route('<div class="home"><p>home</p></div>')
-  .route('/projects', projects)
-  .route('/login', '<div class="login"><p>login</p></div>')
   .listen();
 
 app.mount(el)
 
-// Custom handler for `/projects`
-function projects () {
-  console.log('projects');
+// Custom handler for `/login`
+function login () {
+  console.log('login');
 }
 ```
 
