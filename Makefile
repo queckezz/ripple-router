@@ -1,6 +1,9 @@
 
-build: components
+build: components lint
 	@component build --dev
+
+lint: index.js
+	eslint index.js
 
 components: component.json
 	@component install --dev

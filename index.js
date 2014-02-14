@@ -29,7 +29,7 @@ module.exports = function (Ripple) {
 
   Ripple.attribute('view', function (view, el, attr) {
     mount = el;
-  })
+  });
 
   Ripple.on('construct', function (View) {
 
@@ -69,6 +69,6 @@ module.exports = function (Ripple) {
     View.listen = function (path) {
       router.listen(path);
       return View;
-    }
-  })
-}
+    };
+  });
+};
