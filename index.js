@@ -3,72 +3,57 @@
  * Module dependencies.
  */
 
-var Router = require('router');
-var slice = require('sliced');
-var router = new Router();
+import empty from 'empty';
 
 /**
- * Container where templates is going in.
- *
- * @type {String}
+ * Exports `route`.
  */
 
-var mount;
+export default route;
 
 /**
- * Exports
+ * Simple router for ripple.
  *
- * @type {Function}
+ * @param  {Object} View
  */
 
-module.exports = function (Ripple) {
+function route (View) {
 
   /**
-   * Add `view` directive.
+   * Container for views.
+   *
+   * @type {DOMElement}
    */
 
-  Ripple.attribute('view', function (view, el, attr) {
-    mount = el;
-  });
+  var mount;
 
-  Ripple.on('construct', function (View) {
+  /**
+   * Add a directive that searches for a element with
+   * a `view` attribute.
+   */
+
+  View.directive('view', function () {
+    if (mount) throw new Error('There can only be one `view` attr per View');
+    mount = this.node;
+  })
+
+  /**
+   * switch to `view`.
+   *
+   * @param  {view} view
+   * @return {Function} middleware
+   */
+
+  View.prototype.view = function (view) {
 
     /**
-     * Add route handler.
-     *
-     * @param {String} route (optional)
-     * @param {String | Function} template | Custom Function
-     * @return {View}
+     * Middleware.
      */
 
-    View.route = function (route, cb) {
-      var args = slice(arguments);
-
-      if(args.length !== 2) {
-        cb = route;
-        route = '/';
-      }
-
-      router.on(route, function (context, params) {
-        if (typeof cb != 'function') {
-          var el = cb;
-          mount.innerHTML = el;
-        } else cb();
-      });
-
-      return View;
+    return function () {
+      if (!mount) return;
+      empty(mount);
+      view.appendTo(mount);
     }
-
-    /**
-     * Listens for click events and dispatches a `route`
-     *
-     * @param {String} path (optional)
-     * @return {View}
-     */
-
-    View.listen = function (path) {
-      router.listen(path);
-      return View;
-    };
-  });
-};
+  }
+}

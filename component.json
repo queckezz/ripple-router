@@ -1,7 +1,7 @@
 {
   "name": "router",
   "version": "0.0.1",
-  "repo": "queckezz/ripple-router",
+  "repository": "queckezz/ripple-router",
   "keywords": [
     "ripple",
     "router",
@@ -11,7 +11,6 @@
     "index.js"
   ],
   "dependencies": {
-    "ianstormtaylor/router": "*",
-    "aheckmann/sliced": "*"
+    "yields/empty": "*"
   }
 }

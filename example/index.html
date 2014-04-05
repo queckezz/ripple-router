@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset='UTF-8' />
+  <title>ripple router</title>
+  <script src='build.js'></script>
+</head>
+<body>
+  <script>
+    var ripple = require('ripple')
+    var router = require('router')
+
+    var View = ripple('<div><nav><ul><li><a href="/">Home</a></li><li><a href="/login">Login</a></li></ul></nav><main view></main></div>')
+      .use(router)
+
+    var app = new View()
+      .route('/login', login)
+      .route('<div class="home"><p>home</p></div>')
+      .listen();
+
+    app.mount(document.body)
+
+    // Custom handler for `/login`
+    function login () {
+      console.log('login');
+    }
+
+  </script>
+</body>
+</html>
