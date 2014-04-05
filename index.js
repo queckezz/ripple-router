@@ -38,18 +38,13 @@ function route (View) {
   })
 
   /**
-   * switch to `view`.
+   * Switch to `view`.
    *
    * @param  {view} view
    * @return {Function} middleware
    */
 
   View.prototype.view = function (view) {
-
-    /**
-     * Middleware.
-     */
-
     return function () {
       if (!mount) return;
       empty(mount);
